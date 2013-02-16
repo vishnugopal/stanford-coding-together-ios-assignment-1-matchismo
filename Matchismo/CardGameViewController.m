@@ -18,6 +18,7 @@
 @property (strong, nonatomic) CardMatchingGame *game;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentaryLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *gameModeSelector;
 @end
 
 @implementation CardGameViewController
@@ -61,6 +62,7 @@
 }
 
 - (void)updateUI {
+    UIImage *cardBackImage = [UIImage imageNamed:@"cardback.png"];
     for (UIButton *cardButton in self.cardButtons) {
         Card *card = [self.game cardAtIndex:[self.cardButtons indexOfObject:cardButton]];
         [cardButton setTitle:card.contents forState:UIControlStateSelected];
@@ -69,6 +71,7 @@
         cardButton.selected = card.isFaceUp;
         cardButton.enabled = !card.isUnplayable;
         cardButton.alpha = card.isUnplayable ? 0.3: 1.0;
+        [cardButton setBackgroundImage:cardBackImage forState:UIControlStateNormal];
     }
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
     [self updateCommentary];
@@ -80,6 +83,11 @@
 }
 
 - (IBAction)flipCard:(UIButton *)sender {
+    if (self.gameModeSelector.isEnabled) {
+        self.game.numberOfCardsToMatch = [self numberOfCardsToMatchFromGameModeSelection:self.gameModeSelector.selectedSegmentIndex];
+        self.gameModeSelector.enabled = NO;
+    }
+    
     [self.game flipCardAtIndex:[self.cardButtons indexOfObject:sender]];
     self.flipCount++;
     [self updateUI];
@@ -87,8 +95,13 @@
 
 - (IBAction)dealGame {
     self.game = nil;
+    self.gameModeSelector.enabled = YES;
     self.flipCount = 0;
     [self updateUI];
+}
+
+- (int)numberOfCardsToMatchFromGameModeSelection:(NSUInteger)index {
+    return index + 2;
 }
 
 @end

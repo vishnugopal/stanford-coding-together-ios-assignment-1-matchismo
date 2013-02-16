@@ -23,6 +23,7 @@
 		F52FB0EF16CFD92E00080D45 /* PlayingCard.m in Sources */ = {isa = PBXBuildFile; fileRef = F52FB0EE16CFD92E00080D45 /* PlayingCard.m */; };
 		F52FB0F216CFDC0E00080D45 /* PlayingCardDeck.m in Sources */ = {isa = PBXBuildFile; fileRef = F52FB0F116CFDC0E00080D45 /* PlayingCardDeck.m */; };
 		F59C297116D01CE800953ABC /* CardMatchingGame.m in Sources */ = {isa = PBXBuildFile; fileRef = F59C297016D01CE800953ABC /* CardMatchingGame.m */; };
+		F59C297516D046EC00953ABC /* cardback.png in Resources */ = {isa = PBXBuildFile; fileRef = F59C297416D046EC00953ABC /* cardback.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		F52FB0F116CFDC0E00080D45 /* PlayingCardDeck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayingCardDeck.m; path = Model/PlayingCardDeck.m; sourceTree = "<group>"; };
 		F59C296F16D01CE800953ABC /* CardMatchingGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardMatchingGame.h; sourceTree = "<group>"; };
 		F59C297016D01CE800953ABC /* CardMatchingGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardMatchingGame.m; sourceTree = "<group>"; };
+		F59C297416D046EC00953ABC /* cardback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cardback.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 		F52FB0CA16CFD12900080D45 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F59C297416D046EC00953ABC /* cardback.png */,
 				F52FB0D216CFD12900080D45 /* CardGameAppDelegate.h */,
 				F52FB0D316CFD12900080D45 /* CardGameAppDelegate.m */,
 				F52FB0CB16CFD12900080D45 /* Matchismo-Info.plist */,
@@ -197,6 +200,7 @@
 				F52FB0D816CFD12900080D45 /* Default@2x.png in Resources */,
 				F52FB0DA16CFD12900080D45 /* Default-568h@2x.png in Resources */,
 				F52FB0DD16CFD12900080D45 /* MainStoryboard.storyboard in Resources */,
+				F59C297516D046EC00953ABC /* cardback.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
