@@ -11,6 +11,9 @@
 @interface CardMatchingGame()
 @property (strong, nonatomic) NSMutableArray *cards;
 @property (nonatomic, readwrite) int score;
+@property (nonatomic, readwrite) int lastScore;
+@property (nonatomic, readwrite) Card* lastFlippedCard;
+@property (nonatomic, readwrite) NSArray* lastMatchedCards;
 @end
 
 @implementation CardMatchingGame
@@ -48,20 +51,27 @@
 
 - (void)flipCardAtIndex:(NSUInteger)index {
     Card *card = [self cardAtIndex:index];
+    self.lastFlippedCard = nil;
+    self.lastMatchedCards = nil;
+    self.lastScore = 0;
     
     if (!card.isUnplayable) {
         if (!card.isFaceUp) {
+            self.lastFlippedCard = card;
             for (Card *otherCard in self.cards) {
                 if (otherCard.isFaceUp && !otherCard.isUnplayable) {
                     int matchScore = [card match:@[otherCard]];
                     if (matchScore) {
                         otherCard.unplayable = YES;
                         card.unplayable = YES;
-                        self.score += matchScore * MATCH_BONUS;
+                        self.lastScore = matchScore * MATCH_BONUS;
+                        self.score += self.lastScore;
                     } else {
                         otherCard.faceUp = NO;
-                        self.score -= MISMATCH_PENALTY;
+                        self.lastScore = -MISMATCH_PENALTY;
+                        self.score += self.lastScore;
                     }
+                    self.lastMatchedCards = @[card, otherCard];
                 }
             }
             self.score -= FLIP_COST;

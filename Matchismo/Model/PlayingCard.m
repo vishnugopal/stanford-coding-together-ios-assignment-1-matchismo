@@ -47,6 +47,10 @@
     return _suit ? _suit : @"?";
 }
 
+- (NSString *)description {
+    return self.contents;
+}
+
 + (NSArray*) rankStrings {
     static NSArray *rankStrings = nil;
     if(!rankStrings) rankStrings = @[@"?",@"A", @"1", @"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"J",@"Q",@"K"];

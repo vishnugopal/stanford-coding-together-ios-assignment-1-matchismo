@@ -16,5 +16,8 @@
 - (Card*)cardAtIndex:(NSUInteger)index;
 
 @property (nonatomic, readonly) int score;
+@property (nonatomic, readonly) int lastScore;
+@property (nonatomic, readonly) Card* lastFlippedCard;
+@property (nonatomic, readonly) NSArray* lastMatchedCards;
 
 @end

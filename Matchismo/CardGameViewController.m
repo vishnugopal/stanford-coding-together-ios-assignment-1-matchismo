@@ -17,6 +17,7 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (strong, nonatomic) CardMatchingGame *game;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *commentaryLabel;
 @end
 
 @implementation CardGameViewController
@@ -35,6 +36,25 @@
     [self updateUI];
 }
 
+- (void)updateCommentary {
+    NSString *commentary = @"";
+    int lastScore = [self.game lastScore];
+    NSString *matchedCardsAsString = [[self.game lastMatchedCards] componentsJoinedByString:@" & "];
+    
+    if (matchedCardsAsString) {
+        if (lastScore > 0) {
+            commentary = [NSString stringWithFormat:@"Matched %@ for %d points", matchedCardsAsString, lastScore];
+        } else if (lastScore < 0) {
+            commentary = [NSString stringWithFormat:@"%@ don't match! %d point penalty!", matchedCardsAsString, -lastScore];
+        }
+    } else {
+        commentary = [NSString stringWithFormat:@"Flipped up %@", [self.game lastFlippedCard]];
+    }
+    
+    
+    self.commentaryLabel.text = commentary;
+}
+
 - (void)updateUI {
     for (UIButton *cardButton in self.cardButtons) {
         Card *card = [self.game cardAtIndex:[self.cardButtons indexOfObject:cardButton]];
@@ -44,8 +64,9 @@
         cardButton.selected = card.isFaceUp;
         cardButton.enabled = !card.isUnplayable;
         cardButton.alpha = card.isUnplayable ? 0.3: 1.0;
-        self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
     }
+    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
+    [self updateCommentary];
 }
 
 -(void)setFlipCount:(int)flipCount {
