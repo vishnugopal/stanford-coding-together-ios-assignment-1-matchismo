@@ -40,6 +40,7 @@
     NSString *commentary = @"";
     int lastScore = [self.game lastScore];
     NSString *matchedCardsAsString = [[self.game lastMatchedCards] componentsJoinedByString:@" & "];
+    Card* lastFlippedCard = [self.game lastFlippedCard];
     
     if (matchedCardsAsString) {
         if (lastScore > 0) {
@@ -48,7 +49,11 @@
             commentary = [NSString stringWithFormat:@"%@ don't match! %d point penalty!", matchedCardsAsString, -lastScore];
         }
     } else {
-        commentary = [NSString stringWithFormat:@"Flipped up %@", [self.game lastFlippedCard]];
+        if (lastFlippedCard) {
+            commentary = [NSString stringWithFormat:@"Flipped up %@", lastFlippedCard];
+        } else {
+            commentary = @"Touch to start!";
+        }
     }
     
     
@@ -80,5 +85,10 @@
     [self updateUI];
 }
 
+- (IBAction)dealGame {
+    self.game = nil;
+    self.flipCount = 0;
+    [self updateUI];
+}
 
 @end
