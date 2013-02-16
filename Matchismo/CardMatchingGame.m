@@ -92,18 +92,16 @@
         }
         card.unplayable = YES;
         self.lastScore = matchScore * CardMatchingGameMatchBonus;
-        self.score += self.lastScore;
         self.cardsInMatchQueue = nil;
     } else {
         for (Card* otherCard in self.cardsInMatchQueue) {
             otherCard.faceUp = NO;
         }
         self.lastScore = -CardMatchingGameMismatchPenalty;
-        self.score += self.lastScore;
         self.cardsInMatchQueue = nil;
         [self.cardsInMatchQueue addObject:card];
     }
-    
+    self.score += self.lastScore;
 }
 
 @end
