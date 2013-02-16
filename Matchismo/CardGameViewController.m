@@ -25,7 +25,6 @@
 -(void)setFlipCount:(int)flipCount {
     _flipCount = flipCount;
     self.flipsLabel.text = [NSString stringWithFormat:@"Flips: %d", self.flipCount];
-    NSLog(@"Flips updated to: %d", self.flipCount);
 }
 
 - (IBAction)flipCard:(UIButton *)sender {
